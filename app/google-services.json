@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "978438013472",
+    "project_id": "cooking-coach-practice",
+    "storage_bucket": "cooking-coach-practice.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:978438013472:android:be062a1a34d43af96e3245",
+        "android_client_info": {
+          "package_name": "com.example.loginpractice"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "978438013472-i23ijfoag0u77spt3ahe11bs020dmali.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBgx5BvUcWXP-s3umaMTNyW95bl9Qoese4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "978438013472-i23ijfoag0u77spt3ahe11bs020dmali.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
