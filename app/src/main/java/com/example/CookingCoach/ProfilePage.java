@@ -69,7 +69,7 @@ public class ProfilePage extends AppCompatActivity {
                     String email = userProfile.email;
                     String age = userProfile.age;
 
-                    greetingTextView.setText("Welcome, " + name + "|");
+                    greetingTextView.setText("Welcome, " + name + ".");
                     nameTextView.setText(name);
                     emailTextView.setText(email);
                     ageTextView.setText(age);

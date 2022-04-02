@@ -20,7 +20,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
-    private TextView register;
+    private TextView register, forgotPassword;
     private EditText editTextEmail, editTextPasword;
     private Button signIn;
 
@@ -49,6 +49,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //initialize progress bar
         mAuth = FirebaseAuth.getInstance();
+
+        forgotPassword = (TextView) findViewById(R.id.forgotPassword);
+        forgotPassword.setOnClickListener(this);
+
     }
 
     @Override
@@ -63,6 +67,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //we will create that method needed
                 userLogin();
                 break;
+            case R.id.forgotPassword:
+                startActivity(new Intent(this, ForgotPassword.class));
+                break;
+
 
         }
     }
@@ -113,7 +121,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     if (user.isEmailVerified()) {
                         //redirect to user profile
                         //now we redirect the user to the profile page
-                        startActivity(new Intent(MainActivity.this, ProfileActivity.class));
+                        startActivity(new Intent(MainActivity.this, ProfilePage.class));
                     } else {
                         user.sendEmailVerification();
                         Toast.makeText(MainActivity.this, "Check your email for verification.", Toast.LENGTH_LONG).show();
