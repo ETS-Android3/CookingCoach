@@ -32,6 +32,7 @@ public class ProfilePage extends AppCompatActivity {
     private String userId;
 
     private Button logout;
+    private Button homepage;
 
 
     @Override
@@ -40,12 +41,23 @@ public class ProfilePage extends AppCompatActivity {
         setContentView(R.layout.activity_profile_page);
 
         logout = (Button) findViewById(R.id.signOut);
+        homepage = (Button) findViewById(R.id.home);
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 FirebaseAuth.getInstance().signOut();
                 startActivity(new Intent(ProfilePage.this,MainActivity.class));
+            }
+
+        });
+
+        homepage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+                startActivity(new Intent(ProfilePage.this, ProfileActivity.class));
+
             }
         });
 
