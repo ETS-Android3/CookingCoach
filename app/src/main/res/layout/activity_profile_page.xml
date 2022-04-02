@@ -18,20 +18,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.938" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="412dp"
-        android:layout_height="37dp"
-        android:text="Welcome!!"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/greeting"
@@ -67,43 +53,46 @@
         />
 
     <TextView
-        android:id="@+id/NameTitle"
+        android:id="@+id/nameTitle"
         android:layout_width="113dp"
         android:layout_height="38dp"
         android:text="Name:"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.006"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.255"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintTop_toBottomOf="@+id/emailAddress"
+        app:layout_constraintLeft_toLeftOf="@+id/greeting"
+        android:layout_marginTop="20dp"
+        />
 
     <TextView
-        android:id="@+id/emailAddress"
+        android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/emailAddressTitle"
+        app:layout_constraintTop_toBottomOf="@+id/nameTitle"
         app:layout_constraintLeft_toLeftOf="@+id/emailAddressTitle"
         android:layout_marginLeft="30dp"
-        android:textSize = "20sp"
+        android:textSize = "20sp"    />
 
     <TextView
-        android:id="@+id/textView4"
-        android:layout_width="113dp"
-        android:layout_height="38dp"
+        android:id="@+id/ageTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="Age:"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.373"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintTop_toBottomOf="@+id/name"
+        app:layout_constraintLeft_toLeftOf="@+id/nameTitle"
+        android:layout_marginTop="20dp"
+        />
+
+    <TextView
+        android:id= "@+id/age"
+        android:layout_width = "wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/ageTitle"
+        app:layout_constraintLeft_toLeftOf="@+id/nameTitle"
+        android:layout_marginLeft="30dp"
+        android:textSize = "20sp"
 
     />
 

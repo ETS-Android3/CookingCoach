@@ -18,8 +18,18 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class ProfilePage extends AppCompatActivity {
+
+    private FirebaseUser user;
+    private DatabaseReference reference;
+
+    private String userId;
 
     private Button logout;
 
@@ -38,5 +48,44 @@ public class ProfilePage extends AppCompatActivity {
                 startActivity(new Intent(ProfilePage.this,MainActivity.class));
             }
         });
+
+        user =  FirebaseAuth.getInstance().getCurrentUser();
+        reference = FirebaseDatabase.getInstance().getReference("Users");
+        userId = user.getUid();
+
+        final TextView greetingTextView = (TextView) findViewById(R.id.greeting);
+        final TextView nameTextView = (TextView) findViewById(R.id.name);
+        final TextView emailTextView = (TextView) findViewById(R.id.emailAddress);
+        final TextView ageTextView = (TextView) findViewById(R.id.age);
+
+        reference.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                User userProfile = snapshot.getValue(User.class);
+
+                if (userProfile != null)
+                {
+                    String name = userProfile.fullName;
+                    String email = userProfile.email;
+                    String age = userProfile.age;
+
+                    greetingTextView.setText("Welcome, " + name + "|");
+                    nameTextView.setText(name);
+                    emailTextView.setText(email);
+                    ageTextView.setText(age);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(ProfilePage.this, "Error getting the data!", Toast.LENGTH_LONG).show();
+
+            }
+        });
+
+
+
+
     }
 }
