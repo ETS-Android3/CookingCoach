@@ -7,13 +7,17 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.CookingCoach.Adapters.RandomRecipeAdapter;
 import com.example.CookingCoach.Listeners.RandomRecipeResponseListener;
 import com.example.CookingCoach.Models.RandomRecipieApiResponse;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,10 +30,12 @@ public class ProfileActivity extends AppCompatActivity {
     SearchView searchView;
     List<String> tags = new ArrayList<>();
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
 
         dialog = new ProgressDialog(this);
         dialog.setTitle("Loading...");
@@ -50,6 +56,8 @@ public class ProfileActivity extends AppCompatActivity {
             public boolean onQueryTextChange(String newText) {
                 return false;
             }
+
+
         });
 
         manager = new RequestManager(this);
@@ -71,5 +79,9 @@ public class ProfileActivity extends AppCompatActivity {
         public void didError(String message) {
             Toast.makeText(ProfileActivity.this, message, Toast.LENGTH_SHORT).show();
         }
+
+
+
+
     };
 }
