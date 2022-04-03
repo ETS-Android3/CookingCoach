@@ -33,6 +33,7 @@ public class ProfilePage extends AppCompatActivity {
 
     private Button logout;
     private Button homepage;
+    private Button editProfile;
 
 
     @Override
@@ -42,6 +43,7 @@ public class ProfilePage extends AppCompatActivity {
 
         logout = (Button) findViewById(R.id.signOut);
         homepage = (Button) findViewById(R.id.home);
+        editProfile = (Button) findViewById(R.id.editProfile);
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,6 +59,15 @@ public class ProfilePage extends AppCompatActivity {
             public void onClick(View view) {
                FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
                 startActivity(new Intent(ProfilePage.this, ProfileActivity.class));
+
+            }
+        });
+
+        editProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ProfilePage.this, EditProfile.class));
+
 
             }
         });
