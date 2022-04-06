@@ -36,7 +36,7 @@ public class RandomRecipeAdapter extends RecyclerView.Adapter<RandomRecipeViewHo
     public void onBindViewHolder(@NonNull RandomRecipeViewHolder holder, int position) {
         holder.textView_title.setText(list.get(position).title);
         holder.textView_title.setSelected(true);
-        holder.textView_likes.setText(list.get(position).aggregateLikes+ " Likes");
+        //holder.textView_likes.setText(list.get(position).aggregateLikes+ " Likes");
         holder.textView_servings.setText(list.get(position).servings + " Servings");
         holder.textView_time.setText(list.get(position).readyInMinutes+ " Minutes");
         Picasso.get().load(list.get(position).image).into(holder.imageView_food);
@@ -60,7 +60,7 @@ class RandomRecipeViewHolder extends RecyclerView.ViewHolder
         random_list_container = itemView.findViewById(R.id.random_list_container);
         textView_title = itemView.findViewById(R.id.textView_title);
         textView_servings = itemView.findViewById(R.id.textView_servings);
-        textView_likes = itemView.findViewById(R.id.textView_likes);
+       // textView_likes = itemView.findViewById(R.id.textView_likes);
         textView_time = itemView.findViewById(R.id.textView_time);
         imageView_food = itemView.findViewById(R.id.imageView_food);
     }

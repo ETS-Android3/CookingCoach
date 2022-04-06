@@ -16,6 +16,8 @@
         <entry key="..\:/Users/sakch/AndroidStudioProjects/CookingCoach/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/sakch/AndroidStudioProjects/CookingCoach/app/src/main/res/layout/activity_profile.xml" value="0.264" />
         <entry key="..\:/Users/sakch/AndroidStudioProjects/CookingCoach/app/src/main/res/layout/activity_profile_page.xml" value="0.264" />
+        <entry key="app/src/main/res/drawable/ic_servings.xml" value="0.1945" />
+        <entry key="app/src/main/res/layout/list_random_recipe.xml" value="0.21453900709219859" />
       </map>
     </option>
   </component>
