@@ -117,15 +117,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()) {
                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-                    if (user.isEmailVerified()) {
+                    startActivity(new Intent(MainActivity.this, ProfilePage.class));
+                    /*if (user.isEmailVerified()) {
                         //redirect to user profile
                         //now we redirect the user to the profile page
                         startActivity(new Intent(MainActivity.this, ProfilePage.class));
                     } else {
                         user.sendEmailVerification();
                         Toast.makeText(MainActivity.this, "Check your email for verification.", Toast.LENGTH_LONG).show();
-                    }
+                    }*/
 
                 }
                 else

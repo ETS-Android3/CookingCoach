@@ -28,7 +28,7 @@ public class RequestManager {
 
     public void getRandomRecipies(RandomRecipeResponseListener listener, List<String> tags){
         CallRandomRecipies callRandomRecipies = retrofit.create(CallRandomRecipies.class);
-        Call<RandomRecipieApiResponse> call = callRandomRecipies.callRandom(context.getString(R.string.api_key),"10", tags);
+        Call<RandomRecipieApiResponse> call = callRandomRecipies.callRandom(context.getString(R.string.api_key),"15", tags);
         call.enqueue(new Callback<RandomRecipieApiResponse>() {
             @Override
             public void onResponse(Call<RandomRecipieApiResponse> call, Response<RandomRecipieApiResponse> response) {

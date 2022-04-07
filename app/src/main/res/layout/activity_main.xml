@@ -28,7 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-black"
-        android:text="Your Personal Cooking Coach"
+        android:text="Your Own Personal Chief"
         android:textAlignment="center"
         android:textSize="18sp"
         android:textStyle="italic"
@@ -124,10 +124,10 @@
         android:backgroundTint="#0ED6B9"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.419"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.355"
+        app:layout_constraintVertical_bias="0.224"
         app:srcCompat="@drawable/android4" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
