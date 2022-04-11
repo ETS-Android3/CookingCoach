@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.CookingCoach.Adapters.RandomRecipeAdapter;
 import com.example.CookingCoach.Listeners.RandomRecipeResponseListener;
+import com.example.CookingCoach.Listeners.RecipeClick;
 import com.example.CookingCoach.Models.RandomRecipieApiResponse;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -71,7 +72,7 @@ public class ProfileActivity extends AppCompatActivity {
             recyclerView = findViewById(R.id.recyler_random);
             recyclerView.setHasFixedSize(true);
             recyclerView.setLayoutManager(new GridLayoutManager(ProfileActivity.this, 1));
-            randomRecipeAdapter = new RandomRecipeAdapter(ProfileActivity.this, response.recipes);
+            randomRecipeAdapter = new RandomRecipeAdapter(ProfileActivity.this, response.recipes,recipeClick);
             recyclerView.setAdapter(randomRecipeAdapter);
         }
 
@@ -83,5 +84,14 @@ public class ProfileActivity extends AppCompatActivity {
 
 
 
+    };
+
+    private final RecipeClick recipeClick = new RecipeClick() {
+        @Override
+        public void onRecipeClicked(String id) {
+            //Toast.makeText(ProfileActivity.this, id, Toast.LENGTH_SHORT);
+            startActivity(new Intent(ProfileActivity.this,RecipieDetActivity.class)
+            .putExtra("id",id));
+        }
     };
 }

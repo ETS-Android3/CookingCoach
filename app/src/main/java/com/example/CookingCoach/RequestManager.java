@@ -3,7 +3,9 @@ package com.example.CookingCoach;
 import android.content.Context;
 
 import com.example.CookingCoach.Listeners.RandomRecipeResponseListener;
+import com.example.CookingCoach.Listeners.RecipeDetListener;
 import com.example.CookingCoach.Models.RandomRecipieApiResponse;
+import com.example.CookingCoach.Models.RecipeDetRes;
 
 import java.util.List;
 
@@ -13,6 +15,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public class RequestManager {
@@ -47,6 +50,28 @@ public class RequestManager {
         });
     }
 
+    public void getRecipeDet(RecipeDetListener listener, int id)
+    {
+        CallRecipe callRecipe = retrofit.create(CallRecipe.class);
+        Call<RecipeDetRes> call = callRecipe.callRecipeDet(id, context.getString(R.string.api_key));
+        call.enqueue(new Callback<RecipeDetRes>() {
+            @Override
+            public void onResponse(Call<RecipeDetRes> call, Response<RecipeDetRes> response) {
+                if(!response.isSuccessful())
+                {
+                    listener.didError(response.message());
+                    return;
+                }
+                listener.didFetch(response.body(), response.message());
+            }
+
+            @Override
+            public void onFailure(Call<RecipeDetRes> call, Throwable t) {
+                listener.didError(t.getMessage());
+            }
+        });
+    }
+
     private interface CallRandomRecipies
     {@GET("recipes/random")
         Call<RandomRecipieApiResponse> callRandom(
@@ -55,4 +80,13 @@ public class RequestManager {
                 @Query("tags") List<String> tags
         );
     }
+    private interface CallRecipe
+    {
+        @GET("recipes/{id}/information")
+        Call<RecipeDetRes> callRecipeDet(
+                @Path("id") int id,
+                @Query("apiKey") String apiKey
+        );
+    }
+
 }
