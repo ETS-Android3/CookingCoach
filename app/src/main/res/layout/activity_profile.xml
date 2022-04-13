@@ -5,28 +5,37 @@
     android:id="@+id/welcome"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient_background"
     android:orientation="vertical"
-    tools:context=".ProfileActivity"
-    android:background = "@drawable/gradient_background">
+    tools:context=".ProfileActivity">
 
     <androidx.cardview.widget.CardView
-        app:cardElevation="8dp"
-        android:layout_margin="8dp"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize">
+        android:layout_height="?attr/actionBarSize"
+        android:layout_margin="8dp"
+        app:cardElevation="8dp">
+
         <androidx.appcompat.widget.SearchView
             android:id="@+id/searchView"
-            app:queryHint="Type To Search...."
-            app:iconifiedByDefault="false"
-            app:searchIcon="@drawable/ic_search"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            app:iconifiedByDefault="false"
+            app:queryHint="Type To Search...."
+            app:searchIcon="@drawable/ic_search" />
     </androidx.cardview.widget.CardView>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyler_random"
-        android:layout_margin="4dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="495dp"
+        android:layout_margin="4dp" />
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|center_vertical"
+        app:srcCompat="@drawable/camera_icon" />
 
 
 </LinearLayout>
