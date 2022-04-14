@@ -46,24 +46,32 @@
             <TextView
                 android:id="@+id/mealCalories"
                 android:text="Calories"
+                android:gravity="center"
+                android:textSize="16sp"
                 android:padding="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
             <TextView
                 android:id="@+id/mealCarbs"
                 android:text="Carbs"
+                android:gravity="center"
+                android:textSize="16sp"
                 android:padding="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
             <TextView
                 android:id="@+id/mealFat"
                 android:text="Fat"
+                android:gravity="center"
+                android:textSize="16sp"
                 android:padding="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
             <TextView
                 android:id="@+id/mealProtien"
                 android:text="Protien"
+                android:gravity="center"
+                android:textSize="16sp"
                 android:padding="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
