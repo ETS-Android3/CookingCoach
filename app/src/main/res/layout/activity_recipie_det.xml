@@ -36,6 +36,38 @@
                 android:layout_width="match_parent"
                 android:layout_height="250dp"/>
             <TextView
+                android:text="Macronutrients"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:padding="8dp"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/mealCalories"
+                android:text="Calories"
+                android:padding="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/mealCarbs"
+                android:text="Carbs"
+                android:padding="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/mealFat"
+                android:text="Fat"
+                android:padding="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/mealProtien"
+                android:text="Protien"
+                android:padding="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
                 android:text="Ingredients"
                 android:textStyle="bold"
                 android:textSize="18sp"

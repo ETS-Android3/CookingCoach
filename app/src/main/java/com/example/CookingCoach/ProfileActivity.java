@@ -75,13 +75,20 @@ public class ProfileActivity extends AppCompatActivity {
         dialog = new ProgressDialog(this);
         dialog.setTitle("Loading...");
 
+        //initialize the search view
         searchView = findViewById(R.id.searchView);
+
+        //create a text listener for the search view
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                //clear all of the tags first
                 tags.clear();
+                //then add the search to the tags
                 tags.add(query.toString());
+                //then search the tag made
                 manager.getRandomRecipies(randomRecipeResponseListener, tags);
+                //then show th results
                 dialog.show();
 
                 return true;
@@ -150,7 +157,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     private final RandomRecipeResponseListener randomRecipeResponseListener = new RandomRecipeResponseListener() {
         @Override
-        public void didFetch(RandomRecipieApiResponse response, String message) {
+        public void gotInfo(RandomRecipieApiResponse response, String message) {
             dialog.dismiss();
             recyclerView = findViewById(R.id.recyler_random);
             recyclerView.setHasFixedSize(true);
@@ -160,7 +167,7 @@ public class ProfileActivity extends AppCompatActivity {
         }
 
         @Override
-        public void didError(String message) {
+        public void gotError(String message) {
             Toast.makeText(ProfileActivity.this, message, Toast.LENGTH_SHORT).show();
         }
 
@@ -173,6 +180,7 @@ public class ProfileActivity extends AppCompatActivity {
         @Override
         public void onRecipeClicked(String id) {
             //Toast.makeText(ProfileActivity.this, id, Toast.LENGTH_SHORT);
+            //if the recipe is clicked then we start a new activity which gets us more info of the recipe
             startActivity(new Intent(ProfileActivity.this,RecipieDetActivity.class)
             .putExtra("id",id));
         }
