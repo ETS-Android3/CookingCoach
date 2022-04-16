@@ -36,6 +36,64 @@
                 android:layout_width="match_parent"
                 android:layout_height="250dp"/>
             <TextView
+                android:text="Taste out of 100"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:padding="8dp"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/mealSweetness"
+                android:text="sweetness"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:padding="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/mealSaltiness"
+                android:text="saltiness"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:padding="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/mealSourness"
+                android:text="sourness"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:padding="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/mealBitterness"
+                android:text="bitterness"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:padding="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/mealSavoriness"
+                android:text="savoriness"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:padding="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+
+            <TextView
+                android:id="@+id/mealSpiciness"
+                android:text="spiciness"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:padding="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
                 android:text="Macronutrients"
                 android:textStyle="bold"
                 android:textSize="18sp"
@@ -71,6 +129,21 @@
                 android:id="@+id/mealProtien"
                 android:text="Protien"
                 android:gravity="center"
+                android:textSize="16sp"
+                android:padding="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:text="Instruction Summary"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:padding="8dp"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/mealSummary"
+                android:text="Instruction"
                 android:textSize="16sp"
                 android:padding="8dp"
                 android:layout_width="match_parent"

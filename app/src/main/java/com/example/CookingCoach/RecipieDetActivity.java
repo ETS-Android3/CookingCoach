@@ -12,15 +12,19 @@ import android.widget.Toast;
 
 import com.example.CookingCoach.Adapters.IngrAdapt;
 import com.example.CookingCoach.Listeners.RecipeDetListener;
+import com.example.CookingCoach.Listeners.RecipeSummaryListener;
+import com.example.CookingCoach.Listeners.RecipeTasteListener;
 import com.example.CookingCoach.Listeners.RecipleNutrientsListener;
 import com.example.CookingCoach.Models.RecipeDetRes;
 import com.example.CookingCoach.Models.RecipeNutrientsResponse;
+import com.example.CookingCoach.Models.RecipeSummaryResponse;
+import com.example.CookingCoach.Models.RecipeTasteResponse;
 import com.squareup.picasso.Picasso;
 
 public class RecipieDetActivity extends AppCompatActivity {
     int id;
     TextView mealName;
-    TextView mealCalories, mealCarbs, mealFat, mealProtien;
+    TextView mealCalories, mealCarbs, mealFat, mealProtien, mealSweetness, mealSaltiness, mealSourness, mealBitterness, mealSavoriness, mealSpiciness, mealSummary;
     ImageView mealImage;
     RecyclerView mealIngredients;
     RequestManager requestmana;
@@ -46,6 +50,10 @@ public class RecipieDetActivity extends AppCompatActivity {
 
         requestmana.getRecipeNutrients(RecipleNutrientsListener,id);
 
+        requestmana.getRecipeTaste(recipeTasteListener,id);
+
+        //requestmana.getRecipeSummary(recipeSummaryListener,id);
+
         //set up dialog
         //just a waiting screen (can be removed, not really needed)
         progressdia = new ProgressDialog(this);
@@ -64,6 +72,17 @@ public class RecipieDetActivity extends AppCompatActivity {
         mealCarbs = findViewById(R.id.mealCarbs);
         mealFat = findViewById(R.id.mealFat);
         mealProtien = findViewById(R.id.mealProtien);
+
+        mealSweetness = findViewById(R.id.mealSweetness);
+        mealSaltiness = findViewById(R.id.mealSaltiness);
+        mealBitterness = findViewById(R.id.mealBitterness);
+        mealSourness = findViewById(R.id.mealSourness);
+        mealSavoriness = findViewById(R.id.mealSavoriness);
+        //mealFattiness = findViewById(R.id.mealFattiness);
+        mealSpiciness = findViewById(R.id.mealSpiciness);
+        mealProtien = findViewById(R.id.mealProtien);
+
+        mealSummary = findViewById(R.id.mealSummary);
 
     }
 
@@ -121,6 +140,44 @@ public class RecipieDetActivity extends AppCompatActivity {
 
             //show a message with a error
             Toast.makeText(RecipieDetActivity.this,message,Toast.LENGTH_SHORT).show();
+        }
+    };
+    private  final RecipeTasteListener recipeTasteListener = new RecipeTasteListener() {
+        @Override
+        public void gotInfo(RecipeTasteResponse response, String message) {
+            //mealSweetness.setText(String.valueOf(response.sweetness));
+            mealSweetness.setText("Sweetness: "+Double.toString(response.sweetness));
+            //mealSaltiness.setText(String.valueOf(response.saltiness));
+            mealSaltiness.setText("Saltiness: "+Double.toString(response.saltiness));
+            //mealSourness.setText(String.valueOf(response.sourness));
+            mealSourness.setText("Sourness: "+Double.toString(response.sourness));
+            //mealBitterness.setText(String.valueOf(response.bitterness));
+            mealBitterness.setText("Bitterness: "+Double.toString(response.bitterness));
+            //mealSavoriness.setText(String.valueOf(response.savoriness));
+            mealSavoriness.setText("Savoriness: "+Double.toString(response.savoriness));
+            //mealFattiness.setText(String.valueOf(response.fattiness));
+            //mealFattiness.setText(Integer.toString(response.fattiness));
+            //mealSpiciness.setText(String.valueOf(response.spiciness));
+            mealSpiciness.setText("Spiciness: "+Integer.toString(response.spiciness));
+        }
+
+        @Override
+        public void gotError(String message) {
+            Toast.makeText(RecipieDetActivity.this,message,Toast.LENGTH_SHORT).show();
+        }
+    };
+    private final RecipeSummaryListener recipeSummaryListener = new RecipeSummaryListener() {
+        @Override
+        public void gotInfo(RecipeSummaryResponse response, String message) {
+            progressdia.dismiss();
+
+            mealSummary.setText(response.summary);
+        }
+
+        @Override
+        public void gotError(String message) {
+            Toast.makeText(RecipieDetActivity.this,message,Toast.LENGTH_SHORT).show();
+
         }
     };
 }

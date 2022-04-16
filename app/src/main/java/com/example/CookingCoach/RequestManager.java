@@ -4,10 +4,14 @@ import android.content.Context;
 
 import com.example.CookingCoach.Listeners.RandomRecipeResponseListener;
 import com.example.CookingCoach.Listeners.RecipeDetListener;
+import com.example.CookingCoach.Listeners.RecipeSummaryListener;
+import com.example.CookingCoach.Listeners.RecipeTasteListener;
 import com.example.CookingCoach.Listeners.RecipleNutrientsListener;
 import com.example.CookingCoach.Models.RandomRecipieApiResponse;
 import com.example.CookingCoach.Models.RecipeDetRes;
 import com.example.CookingCoach.Models.RecipeNutrientsResponse;
+import com.example.CookingCoach.Models.RecipeSummaryResponse;
+import com.example.CookingCoach.Models.RecipeTasteResponse;
 
 import java.util.List;
 
@@ -101,6 +105,53 @@ public class RequestManager {
             }
         });
     }
+    public void getRecipeSummary(RecipeSummaryListener listener, int id)
+    {
+        CallRecipeSummary callRecipeSummary = retrofit.create(CallRecipeSummary.class);
+        Call<RecipeSummaryResponse> call = callRecipeSummary.callRecipeSummary(id, context.getString(R.string.api_key));
+        call.enqueue(new Callback<RecipeSummaryResponse>() {
+            @Override
+            public void onResponse(Call<RecipeSummaryResponse> call, Response<RecipeSummaryResponse> response) {
+                if(!response.isSuccessful())
+                {
+                    //then we say we got a error
+                    listener.gotError(response.message());
+                }
+                //otherwise we return the body
+                listener.gotInfo(response.body(), response.message());
+            }
+
+            @Override
+            public void onFailure(Call<RecipeSummaryResponse> call, Throwable t) {
+                //then on failure we just give back the error
+                listener.gotError((t.getMessage()));
+            }
+        });
+    }
+    public void getRecipeTaste(RecipeTasteListener listener, int id)
+    {
+        CallRecipeTaste callRecipeTaste = retrofit.create(CallRecipeTaste.class);
+        Call<RecipeTasteResponse> call = callRecipeTaste.callRecipeTase(id,context.getString(R.string.api_key));
+        call.enqueue(new Callback<RecipeTasteResponse>() {
+            @Override
+            public void onResponse(Call<RecipeTasteResponse> call, Response<RecipeTasteResponse> response) {
+                if(!response.isSuccessful())
+                {
+                    //then we say we got a error
+                    listener.gotError(response.message());
+                }
+                //otherwise we return the body
+                listener.gotInfo(response.body(), response.message());
+            }
+
+            @Override
+            public void onFailure(Call<RecipeTasteResponse> call, Throwable t) {
+                //then on failure we just give back the error
+                listener.gotError((t.getMessage()));
+            }
+        });
+    }
+
 
     private interface CallRandomRecipies
     {
@@ -129,6 +180,22 @@ public class RequestManager {
         @GET("recipes/{id}/nutritionWidget.json")
         Call<RecipeNutrientsResponse> callRecipeNutrients(
                 //pass in the needed arguments for the link
+                @Path("id") int id,
+                @Query("apiKey") String apiKey
+        );
+    }
+    private interface CallRecipeSummary
+    {
+        @GET("recipes/{id}/summary")
+        Call<RecipeSummaryResponse> callRecipeSummary(
+                @Path("id") int id,
+                @Query("apiKey") String apiKey
+        );
+    }
+    private interface CallRecipeTaste
+    {
+        @GET("recipes/{id}/tasteWidget.json")
+        Call<RecipeTasteResponse> callRecipeTase(
                 @Path("id") int id,
                 @Query("apiKey") String apiKey
         );
