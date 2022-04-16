@@ -52,7 +52,7 @@ public class RecipieDetActivity extends AppCompatActivity {
 
         requestmana.getRecipeTaste(recipeTasteListener,id);
 
-        //requestmana.getRecipeSummary(recipeSummaryListener,id);
+        requestmana.getRecipeSummary(recipeSummaryListener,id);
 
         //set up dialog
         //just a waiting screen (can be removed, not really needed)
