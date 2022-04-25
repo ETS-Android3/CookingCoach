@@ -197,14 +197,18 @@ public class RecipieDetActivity extends AppCompatActivity {
             }
 
 
-            String sub3[] = s2.split("<a");
-            String s3 = sub3[0];
+            String sub3[] = s2.split("%");
+            String s3 = "";
+            for(int i =0;i<sub3.length-1;i++)
+            {
+                s3+=sub3[i];
+            }
             String link = "";
-            for(int i =0;i< sub3.length;i++)
+            for(int i =0;i<sub3.length;i++)
             {
                 link+=sub3[i];
             }
-            mealSummary.setText(s3);
+            mealSummary.setText(s3+" out of 100");
 
             String linksub[] = link.split( "\"");
             String links = linksub[1]+" "+ linksub[3];
