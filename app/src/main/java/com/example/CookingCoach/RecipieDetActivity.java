@@ -21,10 +21,15 @@ import com.example.CookingCoach.Models.RecipeSummaryResponse;
 import com.example.CookingCoach.Models.RecipeTasteResponse;
 import com.squareup.picasso.Picasso;
 
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
+import java.util.Base64;
+import java.util.StringJoiner;
+
 public class RecipieDetActivity extends AppCompatActivity {
     int id;
     TextView mealName;
-    TextView mealCalories, mealCarbs, mealFat, mealProtien, mealSweetness, mealSaltiness, mealSourness, mealBitterness, mealSavoriness, mealSpiciness, mealSummary;
+    TextView mealCalories, mealCarbs, mealFat, mealProtien, mealSweetness, mealSaltiness, mealSourness, mealBitterness, mealSavoriness, mealSpiciness, mealSummary, mealLink;
     ImageView mealImage;
     RecyclerView mealIngredients;
     RequestManager requestmana;
@@ -83,6 +88,7 @@ public class RecipieDetActivity extends AppCompatActivity {
         mealProtien = findViewById(R.id.mealProtien);
 
         mealSummary = findViewById(R.id.mealSummary);
+        mealLink = findViewById(R.id.mealLink);
 
     }
 
@@ -158,7 +164,7 @@ public class RecipieDetActivity extends AppCompatActivity {
             //mealFattiness.setText(String.valueOf(response.fattiness));
             //mealFattiness.setText(Integer.toString(response.fattiness));
             //mealSpiciness.setText(String.valueOf(response.spiciness));
-            mealSpiciness.setText("Spiciness: "+Integer.toString(response.spiciness));
+            mealSpiciness.setText("Spiciness: "+Double.toString(response.spiciness));
         }
 
         @Override
@@ -171,7 +177,39 @@ public class RecipieDetActivity extends AppCompatActivity {
         public void gotInfo(RecipeSummaryResponse response, String message) {
             progressdia.dismiss();
 
-            mealSummary.setText(response.summary);
+            String sub[] = response.summary.split("<b>");
+            //StringJoiner sb = new StringJoiner(" ");
+            String s = "";
+            for(int i=0;i<sub.length;i++)
+            {
+                s +=sub[i];
+                //s.join(" ",sub[i]);
+                //sb.add(sub[i]);
+            }
+            //String s = Arrays.toString(sub);
+            String sub2[] = s.split("</b>");
+            //StringJoiner sb2 = new StringJoiner(" ");
+            String s2 = "";
+            for(int i=0;i<sub2.length;i++)
+            {
+                s2+=sub2[i];
+                //sb2.add(sub2[i]);
+            }
+
+
+            String sub3[] = s2.split("<a");
+            String s3 = sub3[0];
+            String link = "";
+            for(int i =0;i< sub3.length;i++)
+            {
+                link+=sub3[i];
+            }
+            mealSummary.setText(s3);
+
+            String linksub[] = link.split( "\"");
+            String links = linksub[1]+" "+ linksub[3];
+            mealLink.setText(links);
+
         }
 
         @Override
