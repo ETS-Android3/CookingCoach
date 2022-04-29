@@ -21,8 +21,12 @@ import com.example.CookingCoach.Models.RecipeNutrientsResponse;
 import com.example.CookingCoach.Models.RecipeSummaryResponse;
 import com.example.CookingCoach.Models.RecipeTasteResponse;
 import com.github.mikephil.charting.animation.Easing;
+import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
@@ -47,6 +51,7 @@ public class RecipieDetActivity extends AppCompatActivity {
     IngrAdapt adapt;
 
     PieChart pieChart;
+    BarChart barChart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,6 +108,8 @@ public class RecipieDetActivity extends AppCompatActivity {
         mealLink = findViewById(R.id.mealLink);
 
         pieChart = findViewById(R.id.pieChart);
+
+        barChart = findViewById(R.id.barChart);
 
     }
 
@@ -225,11 +232,6 @@ public class RecipieDetActivity extends AppCompatActivity {
         }
     };
 
-    public void loadPieChart()
-    {
-        //ArrayList<PieEntry> entries = new ArrayList<>();
-        //entries.add(new PieEntry(Float.parseFloat()))
-    }
     private  final RecipeTasteListener recipeTasteListener = new RecipeTasteListener() {
         @Override
         public void gotInfo(RecipeTasteResponse response, String message) {
@@ -246,7 +248,33 @@ public class RecipieDetActivity extends AppCompatActivity {
             //mealFattiness.setText(String.valueOf(response.fattiness));
             //mealFattiness.setText(Integer.toString(response.fattiness));
             //mealSpiciness.setText(String.valueOf(response.spiciness));
+            if(response.spiciness>100)
+            {
+                response.spiciness=100;
+            }
             mealSpiciness.setText("Spiciness: "+Double.toString(response.spiciness));
+
+
+            ArrayList barArrayList = new ArrayList();
+            barArrayList.add(new BarEntry(1, (float) response.sweetness));
+            barArrayList.add(new BarEntry(2, (float) response.saltiness));
+            barArrayList.add(new BarEntry(3, (float) response.sourness));
+            barArrayList.add(new BarEntry(4, (float) response.bitterness));
+            barArrayList.add(new BarEntry(5, (float) response.savoriness));
+            barArrayList.add(new BarEntry(6, (float) response.spiciness));
+
+
+
+            BarDataSet barDataSet = new BarDataSet(barArrayList,
+                    "Sweet"+"               Salt"+"                 Sour"+"                 Bitter"+"              Savor"+"             Spicy");
+            BarData barData = new BarData(barDataSet);
+            barChart.setData(barData);
+            barDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+            barDataSet.setValueTextColor(Color.BLACK);
+            barDataSet.setValueTextSize(12);
+            barChart.getDescription().setEnabled(false);
+            barChart.animateY(2000);
+
         }
 
         @Override
