@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -19,9 +20,18 @@ import com.example.CookingCoach.Models.RecipeDetRes;
 import com.example.CookingCoach.Models.RecipeNutrientsResponse;
 import com.example.CookingCoach.Models.RecipeSummaryResponse;
 import com.example.CookingCoach.Models.RecipeTasteResponse;
+import com.github.mikephil.charting.animation.Easing;
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.formatter.PercentFormatter;
+import com.github.mikephil.charting.utils.ColorTemplate;
 import com.squareup.picasso.Picasso;
 
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.StringJoiner;
@@ -35,6 +45,8 @@ public class RecipieDetActivity extends AppCompatActivity {
     RequestManager requestmana;
     ProgressDialog progressdia;
     IngrAdapt adapt;
+
+    PieChart pieChart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +102,8 @@ public class RecipieDetActivity extends AppCompatActivity {
         mealSummary = findViewById(R.id.mealSummary);
         mealLink = findViewById(R.id.mealLink);
 
+        pieChart = findViewById(R.id.pieChart);
+
     }
 
     //create the recipe detail listener object
@@ -139,6 +153,68 @@ public class RecipieDetActivity extends AppCompatActivity {
 
             //set the meal protein
             mealProtien.setText("Protein: "+response.protein);
+
+            String total = response.carbs+response.fat+response.protein;
+            String sub[] = total.split("g");
+            float num1 = Float.parseFloat(sub[0]);
+            float num2 = Float.parseFloat(sub[1]);
+            float num3 = Float.parseFloat(sub[2]);
+
+            //set basic format for pie chart
+            pieChart.setDrawHoleEnabled(true);
+            pieChart.setUsePercentValues(true);
+            pieChart.setEntryLabelTextSize(12);
+            pieChart.setEntryLabelColor(Color.BLACK);
+            pieChart.setCenterText("MacroNutrients");
+            pieChart.setCenterTextSize(20);
+            pieChart.getDescription().setEnabled(false);
+
+            //legend for piechart
+            Legend legend = pieChart.getLegend();
+            legend.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
+            legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
+            legend.setOrientation(Legend.LegendOrientation.VERTICAL);
+            legend.setDrawInside(false);
+            legend.setEnabled(true);
+
+
+
+
+
+            //add data to pie chart
+            ArrayList<PieEntry> entries = new ArrayList<>();
+            //entries.add(new PieEntry(0.3f,"Calories"));
+            entries.add(new PieEntry(num1,"Carbs"));
+            entries.add(new PieEntry(num2,"Fat"));
+            entries.add(new PieEntry(num3,"Protein"));
+
+            //get color
+            ArrayList<Integer> colors = new ArrayList<>();
+            for (int color: ColorTemplate.MATERIAL_COLORS)
+            {
+                colors.add(color);
+            }
+            for (int color : ColorTemplate.VORDIPLOM_COLORS)
+            {
+                colors.add(color);
+            }
+            //create dataset
+            PieDataSet dataSet = new PieDataSet(entries,"Macronutrients");
+            dataSet.setColors(colors);
+
+            PieData data = new PieData(dataSet);
+            data.setDrawValues(true);
+            data.setValueFormatter(new PercentFormatter(pieChart));
+            data.setValueTextSize(12f);
+            data.setValueTextColor(Color.BLACK);
+
+
+            //send data to pie chart
+            pieChart.setData(data);
+            pieChart.invalidate();
+
+            //animation for pie chart
+            pieChart.animateX(1400, Easing.EaseInOutQuad);
         }
 
         @Override
@@ -148,6 +224,12 @@ public class RecipieDetActivity extends AppCompatActivity {
             Toast.makeText(RecipieDetActivity.this,message,Toast.LENGTH_SHORT).show();
         }
     };
+
+    public void loadPieChart()
+    {
+        //ArrayList<PieEntry> entries = new ArrayList<>();
+        //entries.add(new PieEntry(Float.parseFloat()))
+    }
     private  final RecipeTasteListener recipeTasteListener = new RecipeTasteListener() {
         @Override
         public void gotInfo(RecipeTasteResponse response, String message) {
