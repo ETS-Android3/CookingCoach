@@ -19,6 +19,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -31,15 +32,20 @@ import java.util.Map;
 
 public class EditProfile extends AppCompatActivity {
 
+    private static final String TAG = "EditProfile";
     EditText profileName, profileEmail, profileAge;
     FirebaseAuth auth;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference reference;
     FirebaseUser user;
+    TextInputEditText displayNameEditText;
 
     //DocumentReference documentReference;
    // FirebaseFirestore db;
     private Button updateProfile;
+    String DISPLAY_NAME = null;
+    private String userId;
+
 
 
 
@@ -47,15 +53,25 @@ public class EditProfile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
+        reference = FirebaseDatabase.getInstance().getReference("Users");
+        userId = user.getUid();
 
 
-       Intent data = getIntent();
+
+        Intent data = getIntent();
        String fullName = data.getStringExtra("fullName");
        String email = data.getStringExtra("email");
        String age = data.getStringExtra("age");
        auth = FirebaseAuth.getInstance();
        user = auth.getCurrentUser();
 
+        if(user != null){
+            Log.d(TAG, "onCreate: "+ user.getDisplayName());
+            if(user.getDisplayName() != null){
+                displayNameEditText.setText(user.getDisplayName());
+            }
+
+        }
        profileName = findViewById(R.id.nameTitle);
        profileEmail = findViewById(R.id.emailAddressTitle);
        profileAge = findViewById(R.id.ageTitle);
@@ -66,6 +82,8 @@ public class EditProfile extends AppCompatActivity {
            public void onClick(View view) {
                updateInfo();
            }
+
+
 
            private void updateInfo() {
                if(profileName.getText().toString().isEmpty() || profileEmail.getText().toString().isEmpty() || profileAge.getText().toString().isEmpty())
@@ -78,9 +96,18 @@ public class EditProfile extends AppCompatActivity {
                user.updateEmail(email).addOnSuccessListener(new OnSuccessListener<Void>() {
                    @Override
                    public void onSuccess(Void unused) {
-                       //DatabaseReference dataRef = database.collection()
-                       //Map<String,Object> edited = new HashMap<>();
-                       //edited.put("email", email);
+                       Map<String,Object> edited = new HashMap<>();
+                       edited.put("email", email);
+                       edited.put("fullName", profileName.getText().toString());
+                       edited.put("age", profileAge.getText().toString());
+                       reference.updateChildren(edited).addOnSuccessListener(new OnSuccessListener<Void>() {
+                           @Override
+                           public void onSuccess(Void unused) {
+                               Toast.makeText(EditProfile.this, "Profile Updated", Toast.LENGTH_SHORT).show();
+                               startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                               finish();
+                           }
+                       });
 
                        Toast.makeText(EditProfile.this, "Email updated", Toast.LENGTH_SHORT).show();
                    }
@@ -92,9 +119,10 @@ public class EditProfile extends AppCompatActivity {
                });
 
                //String name = profileName.getText().toString();
-               /*
 
-               user.updateProfile().addOnSuccessListener(new OnSuccessListener<Void>() {
+               UserProfileChangeRequest changeRequest = new UserProfileChangeRequest.Builder().setDisplayName(DISPLAY_NAME).build();
+
+               user.updateProfile(changeRequest).addOnSuccessListener(new OnSuccessListener<Void>() {
                    @Override
                    public void onSuccess(Void unused) {
                        Toast.makeText(EditProfile.this, "Profile updated", Toast.LENGTH_SHORT).show();
@@ -106,7 +134,9 @@ public class EditProfile extends AppCompatActivity {
                    }
                });
 
-                */
+
+
+
 
 
 

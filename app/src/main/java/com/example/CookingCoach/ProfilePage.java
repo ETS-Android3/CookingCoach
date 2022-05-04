@@ -98,6 +98,7 @@ public class ProfilePage extends AppCompatActivity {
                     ageTextView.setText(age);
                 }
 
+
             }
 
             @Override
