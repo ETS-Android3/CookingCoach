@@ -4,11 +4,13 @@ import android.content.Context;
 
 import com.example.CookingCoach.Listeners.RandomRecipeResponseListener;
 import com.example.CookingCoach.Listeners.RecipeDetListener;
+import com.example.CookingCoach.Listeners.RecipeInstructionListener;
 import com.example.CookingCoach.Listeners.RecipeSummaryListener;
 import com.example.CookingCoach.Listeners.RecipeTasteListener;
 import com.example.CookingCoach.Listeners.RecipleNutrientsListener;
 import com.example.CookingCoach.Models.RandomRecipieApiResponse;
 import com.example.CookingCoach.Models.RecipeDetRes;
+import com.example.CookingCoach.Models.RecipeInstructionsResponse;
 import com.example.CookingCoach.Models.RecipeNutrientsResponse;
 import com.example.CookingCoach.Models.RecipeSummaryResponse;
 import com.example.CookingCoach.Models.RecipeTasteResponse;
@@ -153,6 +155,29 @@ public class RequestManager {
     }
 
 
+    public void getRecipeInstructions(RecipeInstructionListener listener, int id)
+    {
+        CallRecipeInstructions callRecipeInstructions = retrofit.create(CallRecipeInstructions.class);
+        Call<RecipeInstructionsResponse> call = callRecipeInstructions.callRecipeInstructions(id, context.getString(R.string.api_key));
+        call.enqueue(new Callback<RecipeInstructionsResponse>() {
+            @Override
+            public void onResponse(Call<RecipeInstructionsResponse> call, Response<RecipeInstructionsResponse> response) {
+                if(!response.isSuccessful())
+                {
+                    //then we say we got a error
+                    listener.gotError(response.message());
+                }
+                //otherwise we return the body
+                listener.gotInfo(response.body(), response.message());
+            }
+
+            @Override
+            public void onFailure(Call<RecipeInstructionsResponse> call, Throwable t) {
+                //then on failure we just give back the error
+                listener.gotError((t.getMessage()));
+            }
+        });
+    }
     private interface CallRandomRecipies
     {
         //set the link to get the info we need from the api
@@ -200,5 +225,12 @@ public class RequestManager {
                 @Query("apiKey") String apiKey
         );
     }
-
+    private interface CallRecipeInstructions
+    {
+        @GET("recipes/{id}/analyzedInstructions")
+        Call<RecipeInstructionsResponse> callRecipeInstructions(
+                @Path("id") int id,
+                @Query("apiKey") String apiKey
+        );
+    }
 }

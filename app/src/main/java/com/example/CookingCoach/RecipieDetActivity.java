@@ -53,6 +53,8 @@ public class RecipieDetActivity extends AppCompatActivity {
     PieChart pieChart;
     BarChart barChart;
 
+
+    RecyclerView instructionRecycler;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -111,6 +113,7 @@ public class RecipieDetActivity extends AppCompatActivity {
 
         barChart = findViewById(R.id.barChart);
 
+        instructionRecycler = findViewById(R.id.instructionRecycler);
     }
 
     //create the recipe detail listener object
