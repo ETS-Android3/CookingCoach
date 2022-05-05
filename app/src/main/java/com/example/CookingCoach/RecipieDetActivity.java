@@ -45,7 +45,7 @@ public class RecipieDetActivity extends AppCompatActivity {
     TextView mealName;
     TextView mealCalories, mealCarbs, mealFat, mealProtien, mealSweetness, mealSaltiness, mealSourness, mealBitterness, mealSavoriness, mealSpiciness, mealSummary, mealLink;
     ImageView mealImage;
-    RecyclerView mealIngredients;
+    RecyclerView mealIngredients,recycler_instruction_steps;
     RequestManager requestmana;
     ProgressDialog progressdia;
     IngrAdapt adapt;
@@ -107,7 +107,7 @@ public class RecipieDetActivity extends AppCompatActivity {
         mealProtien = findViewById(R.id.mealProtien);
 
         mealSummary = findViewById(R.id.mealSummary);
-        mealLink = findViewById(R.id.mealLink);
+        mealLink = findViewById(R.id.recycler_instruction_steps);
 
         pieChart = findViewById(R.id.pieChart);
 

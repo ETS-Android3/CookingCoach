@@ -158,10 +158,10 @@ public class RequestManager {
     public void getRecipeInstructions(RecipeInstructionListener listener, int id)
     {
         CallRecipeInstructions callRecipeInstructions = retrofit.create(CallRecipeInstructions.class);
-        Call<RecipeInstructionsResponse> call = callRecipeInstructions.callRecipeInstructions(id, context.getString(R.string.api_key));
-        call.enqueue(new Callback<RecipeInstructionsResponse>() {
+        Call<List<RecipeInstructionsResponse>> call = callRecipeInstructions.callRecipeInstructions(id, context.getString(R.string.api_key));
+        call.enqueue(new Callback<List<RecipeInstructionsResponse>>() {
             @Override
-            public void onResponse(Call<RecipeInstructionsResponse> call, Response<RecipeInstructionsResponse> response) {
+            public void onResponse(Call<List<RecipeInstructionsResponse>> call, Response<List<RecipeInstructionsResponse>> response) {
                 if(!response.isSuccessful())
                 {
                     //then we say we got a error
@@ -172,7 +172,7 @@ public class RequestManager {
             }
 
             @Override
-            public void onFailure(Call<RecipeInstructionsResponse> call, Throwable t) {
+            public void onFailure(Call<List<RecipeInstructionsResponse>> call, Throwable t) {
                 //then on failure we just give back the error
                 listener.gotError((t.getMessage()));
             }
@@ -228,7 +228,7 @@ public class RequestManager {
     private interface CallRecipeInstructions
     {
         @GET("recipes/{id}/analyzedInstructions")
-        Call<RecipeInstructionsResponse> callRecipeInstructions(
+        Call<List<RecipeInstructionsResponse>> callRecipeInstructions(
                 @Path("id") int id,
                 @Query("apiKey") String apiKey
         );

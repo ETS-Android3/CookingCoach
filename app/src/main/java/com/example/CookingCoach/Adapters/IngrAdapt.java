@@ -51,6 +51,7 @@ class ingrHolder extends RecyclerView.ViewHolder
 {
     TextView ingrQuantity, ingreName;
     //ImageView ingrImage;
+    RecyclerView recycler_instruction_steps;
 
     public ingrHolder(@NonNull View itemView) {
         super(itemView);
