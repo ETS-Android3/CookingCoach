@@ -41,6 +41,13 @@ import java.util.Base64;
 import java.util.StringJoiner;
 
 public class RecipieDetActivity extends AppCompatActivity {
+
+    //followed the youtuber, Coding with Evan, to see how to get information form the API to the recipe, then followed the same format to obtain that information.
+    //mostly used video to see how to open activity and how to input the info
+    //https://www.youtube.com/watch?v=GgBSlyn05ms&list=PLVE5czp3KIIzdCllHLYrPt7zEH1BZ4qNi&index=4
+
+    //most of the info added was added by the me, the developer, by just following the api calling reference
+
     int id;
     TextView mealName;
     TextView mealCalories, mealCarbs, mealFat, mealProtien, mealSweetness, mealSaltiness, mealSourness, mealBitterness, mealSavoriness, mealSpiciness, mealSummary, mealLink;
@@ -170,6 +177,10 @@ public class RecipieDetActivity extends AppCompatActivity {
             float num2 = Float.parseFloat(sub[1]);
             float num3 = Float.parseFloat(sub[2]);
 
+
+            //Followed a youtube video to see how to implement a pie chart within the recipe details file
+            //https://www.youtube.com/watch?v=S3zqxVoIUig
+
             //set basic format for pie chart
             pieChart.setDrawHoleEnabled(true);
             pieChart.setUsePercentValues(true);
@@ -257,6 +268,8 @@ public class RecipieDetActivity extends AppCompatActivity {
             }
             mealSpiciness.setText("Spiciness: "+Double.toString(response.spiciness));
 
+            //followed a youtube video to see how to implement a bar chart in android studio
+            //https://www.youtube.com/watch?v=dL8VyvLJ2d8
 
             ArrayList barArrayList = new ArrayList();
             barArrayList.add(new BarEntry(1, (float) response.sweetness));
