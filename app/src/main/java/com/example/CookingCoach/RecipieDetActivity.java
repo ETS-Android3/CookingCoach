@@ -12,15 +12,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.CookingCoach.Adapters.IngrAdapt;
-import com.example.CookingCoach.Adapters.InstructionStepAdapter;
-import com.example.CookingCoach.Adapters.RecipeInstructionAdapter;
 import com.example.CookingCoach.Listeners.RecipeDetListener;
-import com.example.CookingCoach.Listeners.RecipeInstructionListener;
 import com.example.CookingCoach.Listeners.RecipeSummaryListener;
 import com.example.CookingCoach.Listeners.RecipeTasteListener;
 import com.example.CookingCoach.Listeners.RecipleNutrientsListener;
 import com.example.CookingCoach.Models.RecipeDetRes;
-import com.example.CookingCoach.Models.RecipeInstructionsResponse;
 import com.example.CookingCoach.Models.RecipeNutrientsResponse;
 import com.example.CookingCoach.Models.RecipeSummaryResponse;
 import com.example.CookingCoach.Models.RecipeTasteResponse;
@@ -42,21 +38,17 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Base64;
-import java.util.List;
 import java.util.StringJoiner;
 
 public class RecipieDetActivity extends AppCompatActivity {
-
-
     int id;
     TextView mealName;
     TextView mealCalories, mealCarbs, mealFat, mealProtien, mealSweetness, mealSaltiness, mealSourness, mealBitterness, mealSavoriness, mealSpiciness, mealSummary, mealLink;
     ImageView mealImage;
-    RecyclerView mealIngredients, recycler_meal_instructions;
+    RecyclerView mealIngredients,recycler_instruction_steps;
     RequestManager requestmana;
     ProgressDialog progressdia;
     IngrAdapt adapt;
-    RecipeInstructionAdapter recipeInstructionAdapter;
 
     PieChart pieChart;
     BarChart barChart;
@@ -85,8 +77,6 @@ public class RecipieDetActivity extends AppCompatActivity {
         requestmana.getRecipeTaste(recipeTasteListener,id);
 
         requestmana.getRecipeSummary(recipeSummaryListener,id);
-
-        requestmana.getRecipeInstructions(recipeInstructionListener, id);
 
         //set up dialog
         //just a waiting screen (can be removed, not really needed)
@@ -117,12 +107,13 @@ public class RecipieDetActivity extends AppCompatActivity {
         mealProtien = findViewById(R.id.mealProtien);
 
         mealSummary = findViewById(R.id.mealSummary);
-        recycler_meal_instructions = findViewById(R.id.recycler_meal_instructions);
+        mealLink = findViewById(R.id.recycler_instruction_steps);
 
         pieChart = findViewById(R.id.pieChart);
 
         barChart = findViewById(R.id.barChart);
 
+        instructionRecycler = findViewById(R.id.instructionRecycler);
     }
 
     //create the recipe detail listener object
@@ -334,28 +325,13 @@ public class RecipieDetActivity extends AppCompatActivity {
 
             String linksub[] = link.split( "\"");
             String links = linksub[1]+" "+ linksub[3];
+            mealLink.setText(links);
 
         }
 
         @Override
         public void gotError(String message) {
             Toast.makeText(RecipieDetActivity.this,message,Toast.LENGTH_SHORT).show();
-
-        }
-    };
-
-    private final RecipeInstructionListener recipeInstructionListener = new RecipeInstructionListener() {
-        @Override
-        public void gotInfo(List<RecipeInstructionsResponse> response, String message) {
-            recycler_meal_instructions.setHasFixedSize(true);
-            recycler_meal_instructions.setLayoutManager(new LinearLayoutManager(RecipieDetActivity.this, LinearLayoutManager.VERTICAL, false));
-
-            recipeInstructionAdapter = new RecipeInstructionAdapter(RecipieDetActivity.this, response);
-            recycler_meal_instructions.setAdapter(recipeInstructionAdapter);
-        }
-
-        @Override
-        public void gotError(String message) {
 
         }
     };

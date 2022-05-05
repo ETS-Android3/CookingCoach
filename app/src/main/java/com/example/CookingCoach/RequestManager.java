@@ -37,6 +37,9 @@ public class RequestManager {
         this.context = context;
     }
 
+    //Followed a Youtuber, Coding with Evan, to understand the basics of the api calling and how to search and display the information form the API
+    //https://www.youtube.com/watch?v=6-891CSz6v0&list=PLVE5czp3KIIzdCllHLYrPt7zEH1BZ4qNi
+
     public void getRandomRecipies(RandomRecipeResponseListener listener, List<String> tags){
         CallRandomRecipies callRandomRecipies = retrofit.create(CallRandomRecipies.class);
         Call<RandomRecipieApiResponse> call = callRandomRecipies.callRandom(context.getString(R.string.api_key),"15", tags);
