@@ -148,21 +148,8 @@
                 android:padding="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
-            <TextView
-                android:text="Instruction Link"
-                android:textStyle="bold"
-                android:textSize="18sp"
-                android:padding="8dp"
-                android:gravity="center"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/instructionRecycler"
-                android:layout_margin="8dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_instruction_steps"
+                android:id="@+id/recycler_meal_instructions"
                 android:autoLink="all"
                 android:text="Instruction"
                 android:textSize="16sp"
