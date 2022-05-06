@@ -45,9 +45,9 @@
         android:layout_width="800dp"
         android:layout_height="400dp"
         android:layout_marginTop="180dp"
+        android:alpha="0.3"
         android:backgroundTint="#ECEFEF"
         android:backgroundTintMode="src_over"
-        android:alpha="0.3"
         app:layout_constraintStart_toStartOf="@+id/greeting"
         app:layout_constraintTop_toBottomOf="@+id/greeting"
         app:srcCompat="@drawable/pics" />
@@ -56,8 +56,8 @@
         android:id="@+id/imageView4"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginTop="5dp"
         android:layout_marginLeft="310dp"
+        android:layout_marginTop="5dp"
         app:srcCompat="@drawable/wal" />
 
     <Button

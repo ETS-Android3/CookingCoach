@@ -24,6 +24,7 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -55,7 +56,6 @@ import java.util.List;
 
 public class ProfileActivity extends AppCompatActivity {
     ProgressDialog dialog;
-    Bitmap bitmap;
     RequestManager manager;
     RandomRecipeAdapter randomRecipeAdapter;
     RecyclerView recyclerView;
@@ -66,6 +66,8 @@ public class ProfileActivity extends AppCompatActivity {
 
     private Button signout;
     private Button editProfile;
+    ImageView imageView3, imageView4;
+    TextView greeting;
 
     List<String> tags = new ArrayList<>();
 
@@ -78,6 +80,9 @@ public class ProfileActivity extends AppCompatActivity {
         dialog.setTitle("Loading...");
         signout = (Button) findViewById(R.id.logout);
         editProfile = (Button) findViewById(R.id.editProfile);
+        imageView3 = findViewById(R.id.imageView3);
+        imageView4 = findViewById(R.id.imageView4);
+        greeting = findViewById(R.id.greeting);
 
 
         //initialize the search view
@@ -114,6 +119,10 @@ public class ProfileActivity extends AppCompatActivity {
                 //then search the tag made
                 manager.getRandomRecipies(randomRecipeResponseListener, tags);
                 //then show th results
+                imageView3.setVisibility(View.GONE);
+                //greeting.setVisibility(View.GONE);
+                imageView4.setVisibility(View.GONE);
+
                 dialog.show();
 
                 return true;
