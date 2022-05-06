@@ -46,7 +46,6 @@ import com.google.firebase.database.ValueEventListener;
 import org.tensorflow.lite.DataType;
 import org.tensorflow.lite.support.model.Model;
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer;
-import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -65,110 +64,99 @@ public class ProfileActivity extends AppCompatActivity {
     private DatabaseReference reference;
     private String userId;
 
-
-    private Button logout;
+    private Button signout;
     private Button editProfile;
+
     List<String> tags = new ArrayList<>();
 
 
-      @Override
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
-          super.onCreate(savedInstanceState);
-          setContentView(R.layout.activity_profile);
-          dialog = new ProgressDialog(this);
-          dialog.setTitle("Loading...");
-
-          //initialize the search view
-          searchView = findViewById(R.id.searchView);
-          logout = (Button) findViewById(R.id.signOut);
-          editProfile = (Button) findViewById(R.id.editProfile);
-
-          logout.setOnClickListener(new View.OnClickListener() {
-              @Override
-              public void onClick(View view) {
-                  FirebaseAuth.getInstance().signOut();
-                  startActivity(new Intent(ProfileActivity.this,MainActivity.class));
-              }
-
-          });
-
-          editProfile.setOnClickListener(new View.OnClickListener() {
-              @Override
-              public void onClick(View view) {
-                  startActivity(new Intent(ProfileActivity.this, EditProfile.class));
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_profile);
+        dialog = new ProgressDialog(this);
+        dialog.setTitle("Loading...");
+        signout = (Button) findViewById(R.id.logout);
+        editProfile = (Button) findViewById(R.id.editProfile);
 
 
-              }
-          });
+        //initialize the search view
+        searchView = findViewById(R.id.searchView);
+
+        editProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ProfileActivity.this, EditProfile.class));
 
 
-          //create a text listener for the search view
-          searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-              @Override
-              public boolean onQueryTextSubmit(String query) {
-                  //clear all of the tags first
-                  tags.clear();
-                  //then add the search to the tags
-                  tags.add(query.toString());
-                  //then search the tag made
-                  manager.getRandomRecipies(randomRecipeResponseListener, tags);
-                  //then show th results
-                  dialog.show();
+            }
+        });
 
-                  return true;
-              }
+        signout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(ProfileActivity.this,MainActivity.class));
+            }
 
-              @Override
-              public boolean onQueryTextChange(String newText) {
-                  return false;
-              }
+        });
 
 
-          });
+
+        //create a text listener for the search view
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                //clear all of the tags first
+                tags.clear();
+                //then add the search to the tags
+                tags.add(query.toString());
+                //then search the tag made
+                manager.getRandomRecipies(randomRecipeResponseListener, tags);
+                //then show th results
+                dialog.show();
+
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
 
 
-          user =  FirebaseAuth.getInstance().getCurrentUser();
-          reference = FirebaseDatabase.getInstance().getReference("Users");
-          userId = user.getUid();
+        });
 
-          final TextView greetingTextView = (TextView) findViewById(R.id.greeting);
-          final TextView _greetingTextView = (TextView) findViewById(R.id.greeting1);
-          final TextView nameTextView = (TextView) findViewById(R.id.name);
-          final TextView emailTextView = (TextView) findViewById(R.id.emailAddress);
-          final TextView ageTextView = (TextView) findViewById(R.id.age);
+        user =  FirebaseAuth.getInstance().getCurrentUser();
+        reference = FirebaseDatabase.getInstance().getReference("Users");
+        userId = user.getUid();
+        final TextView greetingTextView = (TextView) findViewById(R.id.greeting);
 
-          reference.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
-              @Override
-              public void onDataChange(@NonNull DataSnapshot snapshot) {
-                  User userProfile = snapshot.getValue(User.class);
+        reference.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                User userProfile = snapshot.getValue(User.class);
 
-                  if (userProfile != null)
-                  {
-                      String name = userProfile.fullName;
-                      String email = userProfile.email;
-                      String age = userProfile.age;
+                if (userProfile != null)
+                {
+                    String name = userProfile.fullName;
 
-                      greetingTextView.setText("   Enter any ingredients, " + name + " !!");
-                      _greetingTextView.setText("  Welcome, " + name + " ! ");
-                      nameTextView.setText(name);
-                      emailTextView.setText(email);
-                      ageTextView.setText(age);
-                  }
+                    greetingTextView.setText("   Welcome, " + name + " !\n" + "  Enter any ingredient" + " !");
+                }
 
+            }
 
-              }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(ProfileActivity.this, "Error getting the data!", Toast.LENGTH_LONG).show();
 
-              @Override
-              public void onCancelled(@NonNull DatabaseError error) {
-                  Toast.makeText(ProfileActivity.this, "Error getting the data!", Toast.LENGTH_LONG).show();
+            }
+        });
 
-              }
-          });
-
-          manager = new RequestManager(this);
-          // manager.getRandomRecipies(randomRecipeResponseListener);
-          //dialog.show();
-       }
+        manager = new RequestManager(this);
+        // manager.getRandomRecipies(randomRecipeResponseListener);
+        //dialog.show();
+    }
 
 
 
@@ -199,7 +187,7 @@ public class ProfileActivity extends AppCompatActivity {
             //Toast.makeText(ProfileActivity.this, id, Toast.LENGTH_SHORT);
             //if the recipe is clicked then we start a new activity which gets us more info of the recipe
             startActivity(new Intent(ProfileActivity.this,RecipieDetActivity.class)
-            .putExtra("id",id));
+                    .putExtra("id",id));
         }
     };
 
