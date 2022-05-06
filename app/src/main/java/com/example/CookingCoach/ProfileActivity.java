@@ -46,6 +46,7 @@ import com.google.firebase.database.ValueEventListener;
 import org.tensorflow.lite.DataType;
 import org.tensorflow.lite.support.model.Model;
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer;
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -63,6 +64,10 @@ public class ProfileActivity extends AppCompatActivity {
     private FirebaseUser user;
     private DatabaseReference reference;
     private String userId;
+
+
+    private Button logout;
+    private Button editProfile;
     List<String> tags = new ArrayList<>();
 
 
@@ -75,6 +80,27 @@ public class ProfileActivity extends AppCompatActivity {
 
           //initialize the search view
           searchView = findViewById(R.id.searchView);
+          logout = (Button) findViewById(R.id.signOut);
+          editProfile = (Button) findViewById(R.id.editProfile);
+
+          logout.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View view) {
+                  FirebaseAuth.getInstance().signOut();
+                  startActivity(new Intent(ProfileActivity.this,MainActivity.class));
+              }
+
+          });
+
+          editProfile.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View view) {
+                  startActivity(new Intent(ProfileActivity.this, EditProfile.class));
+
+
+              }
+          });
+
 
           //create a text listener for the search view
           searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -100,10 +126,16 @@ public class ProfileActivity extends AppCompatActivity {
 
           });
 
+
           user =  FirebaseAuth.getInstance().getCurrentUser();
           reference = FirebaseDatabase.getInstance().getReference("Users");
           userId = user.getUid();
+
           final TextView greetingTextView = (TextView) findViewById(R.id.greeting);
+          final TextView _greetingTextView = (TextView) findViewById(R.id.greeting1);
+          final TextView nameTextView = (TextView) findViewById(R.id.name);
+          final TextView emailTextView = (TextView) findViewById(R.id.emailAddress);
+          final TextView ageTextView = (TextView) findViewById(R.id.age);
 
           reference.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
               @Override
@@ -113,9 +145,16 @@ public class ProfileActivity extends AppCompatActivity {
                   if (userProfile != null)
                   {
                       String name = userProfile.fullName;
+                      String email = userProfile.email;
+                      String age = userProfile.age;
 
-                      greetingTextView.setText("  Enter any ingredient " + name + " !");
+                      greetingTextView.setText("   Enter any ingredients, " + name + " !!");
+                      _greetingTextView.setText("  Welcome, " + name + " ! ");
+                      nameTextView.setText(name);
+                      emailTextView.setText(email);
+                      ageTextView.setText(age);
                   }
+
 
               }
 
