@@ -37,7 +37,6 @@ public class InstructionIngredientAdapter extends RecyclerView.Adapter<Instructi
 
         holder.textView_instructions_step_item.setText(list.get(position).name);
         holder.textView_instructions_step_item.setSelected(true);
-        Picasso.get().load("https://spoonacular.com/cdn/ingredients_100x100/"+list.get(position).image).into(holder.imageView_instructions_step_items);
 
 
     }
@@ -49,11 +48,9 @@ public class InstructionIngredientAdapter extends RecyclerView.Adapter<Instructi
 }
 class InstructionIngredientsViewHolder extends RecyclerView.ViewHolder{
 
-    ImageView imageView_instructions_step_items;
     TextView textView_instructions_step_item;
     public InstructionIngredientsViewHolder(@NonNull View itemView){
         super(itemView);
-        imageView_instructions_step_items = itemView.findViewById(R.id.imageView_instructions_step_items);
         textView_instructions_step_item = itemView.findViewById(R.id.textView_instructions_step_item);
     }
 }
