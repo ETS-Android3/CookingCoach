@@ -85,6 +85,7 @@ public class ProfileActivity extends AppCompatActivity {
         greeting = findViewById(R.id.greeting);
 
 
+
         //initialize the search view
         searchView = findViewById(R.id.searchView);
 
@@ -152,7 +153,7 @@ public class ProfileActivity extends AppCompatActivity {
                 {
                     String name = userProfile.fullName;
 
-                    greetingTextView.setText("   Welcome, " + name + " !\n" + "  Enter any ingredient" + " !");
+                    greetingTextView.setText("   Welcome, " + name + "!\n" + "  Enter any ingredient" + "!");
                 }
 
             }

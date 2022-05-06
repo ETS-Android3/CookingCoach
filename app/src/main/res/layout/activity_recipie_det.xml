@@ -9,6 +9,7 @@
 
     <androidx.appcompat.widget.Toolbar
         app:title="Recipe Information"
+        android:textColor="@color/black"
         android:gravity="center"
         android:layout_marginLeft="110dp"
         android:layout_width="wrap_content"
@@ -24,6 +25,7 @@
             <TextView
                 android:id="@+id/mealName"
                 android:text="Recipe Name"
+                android:textColor="@color/black"
                 android:textSize="20sp"
                 android:gravity="center"
                 android:textStyle="bold"
@@ -40,6 +42,7 @@
                 android:textStyle="bold"
                 android:textSize="18sp"
                 android:padding="8dp"
+                android:textColor="@color/black"
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
@@ -52,6 +55,7 @@
                 android:text="sweetness"
                 android:gravity="center"
                 android:textSize="16sp"
+                android:textColor="@color/black"
                 android:padding="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
@@ -60,6 +64,7 @@
                 android:text="saltiness"
                 android:gravity="center"
                 android:textSize="16sp"
+                android:textColor="@color/black"
                 android:padding="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
@@ -69,6 +74,7 @@
                 android:gravity="center"
                 android:textSize="16sp"
                 android:padding="8dp"
+                android:textColor="@color/black"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
             <TextView
@@ -76,6 +82,7 @@
                 android:text="bitterness"
                 android:gravity="center"
                 android:textSize="16sp"
+                android:textColor="@color/black"
                 android:padding="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
@@ -84,6 +91,7 @@
                 android:text="savoriness"
                 android:gravity="center"
                 android:textSize="16sp"
+                android:textColor="@color/black"
                 android:padding="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
@@ -94,6 +102,7 @@
                 android:text="spiciness"
                 android:gravity="center"
                 android:textSize="16sp"
+                android:textColor="@color/black"
                 android:padding="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
@@ -105,6 +114,7 @@
                 android:id="@+id/mealCalories"
                 android:text="Calories"
                 android:gravity="center"
+                android:textColor="@color/black"
                 android:textSize="16sp"
                 android:padding="8dp"
                 android:layout_width="match_parent"
@@ -114,6 +124,7 @@
                 android:text="Carbs"
                 android:gravity="center"
                 android:textSize="16sp"
+                android:textColor="@color/black"
                 android:padding="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
@@ -123,6 +134,7 @@
                 android:gravity="center"
                 android:textSize="16sp"
                 android:padding="8dp"
+                android:textColor="@color/black"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
             <TextView
@@ -131,6 +143,7 @@
                 android:gravity="center"
                 android:textSize="16sp"
                 android:padding="8dp"
+                android:textColor="@color/black"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
             <TextView
@@ -138,6 +151,7 @@
                 android:textStyle="bold"
                 android:textSize="18sp"
                 android:padding="8dp"
+                android:textColor="@color/black"
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
@@ -146,6 +160,31 @@
                 android:text="Instruction"
                 android:textSize="16sp"
                 android:padding="8dp"
+                android:textColor="@color/black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="8dp"
+                android:textColor="@color/black"
+                android:text="Recipe Ingredients"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/mealIngredients"
+                android:layout_margin="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:text="Recipe Instructions"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:padding="8dp"
+                android:textColor="@color/black"
+                android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
             <androidx.recyclerview.widget.RecyclerView
@@ -157,25 +196,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:padding="8dp"
-                android:text="Ingredients"
-                android:textSize="18sp"
-                android:textStyle="bold" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/mealIngredients"
-                android:layout_margin="8dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
 
             <Button
                 android:id="@+id/homepage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
                 android:text="Home page"
                 android:textColor="#ffffff"
                 android:backgroundTint="#0ED6B9"/>

@@ -44,7 +44,8 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.21453900709219859" />
         <entry key="app/src/main/res/layout/activity_profile.xml" value="0.44114583333333335" />
         <entry key="app/src/main/res/layout/activity_profile_page.xml" value="0.44114583333333335" />
-        <entry key="app/src/main/res/layout/activity_recipie_det.xml" value="0.27485380116959063" />
+        <entry key="app/src/main/res/layout/activity_recipie_det.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/list_instructions_steps.xml" value="0.17983789260385005" />
         <entry key="app/src/main/res/layout/list_random_recipe.xml" value="0.21453900709219859" />
         <entry key="app/src/main/res/layout/meal_ingredients.xml" value="0.27219202898550726" />
         <entry key="app/src/main/res/layout/recipe_instructions.xml" value="0.17983789260385005" />
