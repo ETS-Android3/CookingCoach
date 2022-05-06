@@ -5,9 +5,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +22,7 @@ import com.example.CookingCoach.Listeners.RecipeInstructionListener;
 import com.example.CookingCoach.Listeners.RecipeSummaryListener;
 import com.example.CookingCoach.Listeners.RecipeTasteListener;
 import com.example.CookingCoach.Listeners.RecipleNutrientsListener;
+import com.example.CookingCoach.Models.Recipe;
 import com.example.CookingCoach.Models.RecipeDetRes;
 import com.example.CookingCoach.Models.RecipeInstructionsResponse;
 import com.example.CookingCoach.Models.RecipeNutrientsResponse;
@@ -36,6 +40,8 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.squareup.picasso.Picasso;
 
 import java.nio.charset.StandardCharsets;
@@ -50,6 +56,7 @@ public class RecipieDetActivity extends AppCompatActivity {
     TextView mealName;
     TextView mealCalories, mealCarbs, mealFat, mealProtien, mealSweetness, mealSaltiness, mealSourness, mealBitterness, mealSavoriness, mealSpiciness, mealSummary, mealLink;
     ImageView mealImage;
+    private Button home;
     RecyclerView mealIngredients,recyclerView_meal_instructions;
     RequestManager requestmana;
     ProgressDialog progressdia;
@@ -66,6 +73,8 @@ public class RecipieDetActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipie_det);
 
+
+        home = (Button) findViewById(R.id.homepage);
         //create the the way to call the variables in the layout xml
         findIds();
 
@@ -91,6 +100,15 @@ public class RecipieDetActivity extends AppCompatActivity {
         progressdia = new ProgressDialog(this);
         progressdia.setTitle("Loading Details...");
         progressdia.show();
+
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+                startActivity(new Intent(RecipieDetActivity.this, ProfileActivity.class));
+
+            }
+        });
     }
 
     private void findIds() {
