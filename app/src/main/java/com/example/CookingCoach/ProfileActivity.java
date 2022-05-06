@@ -122,6 +122,8 @@ public class ProfileActivity extends AppCompatActivity {
                 imageView3.setVisibility(View.GONE);
                 //greeting.setVisibility(View.GONE);
                 imageView4.setVisibility(View.GONE);
+                editProfile.setVisibility(View.GONE);
+                signout.setVisibility(View.GONE);
 
                 dialog.show();
 
