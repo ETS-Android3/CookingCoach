@@ -5,7 +5,7 @@
     android:id="@+id/welcome"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_background"
+    android:background="@drawable/backs_1"
     android:orientation="vertical"
     tools:context=".ProfileActivity">
 
@@ -38,6 +38,7 @@
         android:layout_marginTop="5dp"
         android:textAlignment="center"
         android:textSize="20sp"
+        android:textStyle="bold"
         tools:ignore="MissingConstraints" />
 
     <ImageView
@@ -46,6 +47,7 @@
         android:layout_height="660dp"
         android:layout_marginTop="80dp"
         android:backgroundTint="#ECEFEF"
+        android:alpha = "0.6"
         android:backgroundTintMode="src_over"
         app:layout_constraintStart_toStartOf="@+id/greeting"
         app:layout_constraintTop_toBottomOf="@+id/greeting"
