@@ -22,8 +22,9 @@ public class User {
         this.age = age;
         this.email = email;
     }
-    @Exclude
 
+    /*
+    @Exclude
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
         if(fullName != null)
@@ -37,5 +38,6 @@ public class User {
 
         return result;
     }
+    */
 
 }

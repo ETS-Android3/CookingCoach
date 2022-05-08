@@ -19,6 +19,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     private TextView register, forgotPassword;
     private EditText editTextEmail, editTextPasword;
@@ -130,7 +131,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 else
                 {
-                    Toast.makeText(MainActivity.this,"Failed To Login. Please Check Credintials",Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.this,"Failed To Login. Please Check Credentials",Toast.LENGTH_LONG).show();
 
                 }
                 }

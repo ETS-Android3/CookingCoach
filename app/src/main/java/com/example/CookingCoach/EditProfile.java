@@ -26,9 +26,14 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 
 import java.util.HashMap;
 import java.util.Map;
+
+
 
 public class EditProfile extends AppCompatActivity {
 
@@ -39,32 +44,37 @@ public class EditProfile extends AppCompatActivity {
     DatabaseReference reference;
     FirebaseUser user;
     TextInputEditText displayNameEditText;
+    FirebaseFirestore fStore;
+
+
 
     //DocumentReference documentReference;
    // FirebaseFirestore db;
     private Button updateProfile;
-    String DISPLAY_NAME = null;
-    private String userId;
+    //String DISPLAY_NAME = null;
+    //private String userId;
 
 
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
         reference = FirebaseDatabase.getInstance().getReference("Users");
-        userId = user.getUid();
-
-
-
+        //userId = user.getUid();
         Intent data = getIntent();
+
        String fullName = data.getStringExtra("fullName");
        String email = data.getStringExtra("email");
        String age = data.getStringExtra("age");
        auth = FirebaseAuth.getInstance();
        user = auth.getCurrentUser();
+       fStore = FirebaseFirestore.getInstance();
 
+        /*
         if(user != null){
             Log.d(TAG, "onCreate: "+ user.getDisplayName());
             if(user.getDisplayName() != null){
@@ -72,6 +82,8 @@ public class EditProfile extends AppCompatActivity {
             }
 
         }
+        */
+
        profileName = findViewById(R.id.nameTitle);
        profileEmail = findViewById(R.id.emailAddressTitle);
        profileAge = findViewById(R.id.ageTitle);
@@ -95,14 +107,18 @@ public class EditProfile extends AppCompatActivity {
                String email = profileEmail.getText().toString();
                user.updateEmail(email).addOnSuccessListener(new OnSuccessListener<Void>() {
                    @Override
-                   public void onSuccess(Void unused) {
+                   public void onSuccess(Void aVoid) {
+                       //DocumentReference docRef = fStore.collection("Users").document(user.getUid());
+                       String userId = user.getUid();
                        Map<String,Object> edited = new HashMap<>();
+                       //String edited ;
                        edited.put("email", email);
                        edited.put("fullName", profileName.getText().toString());
                        edited.put("age", profileAge.getText().toString());
-                       reference.updateChildren(edited).addOnSuccessListener(new OnSuccessListener<Void>() {
+
+                       reference.child(userId).updateChildren(edited).addOnSuccessListener(new OnSuccessListener<Void>() {
                            @Override
-                           public void onSuccess(Void unused) {
+                           public void onSuccess(Void aVoid) {
                                Toast.makeText(EditProfile.this, "Profile Updated", Toast.LENGTH_SHORT).show();
                                startActivity(new Intent(getApplicationContext(),MainActivity.class));
                                finish();
@@ -120,6 +136,8 @@ public class EditProfile extends AppCompatActivity {
 
                //String name = profileName.getText().toString();
 
+               /*
+
                UserProfileChangeRequest changeRequest = new UserProfileChangeRequest.Builder().setDisplayName(DISPLAY_NAME).build();
 
                user.updateProfile(changeRequest).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -134,9 +152,7 @@ public class EditProfile extends AppCompatActivity {
                    }
                });
 
-
-
-
+               */
 
 
 
@@ -154,5 +170,14 @@ public class EditProfile extends AppCompatActivity {
 
 
 
-    }
+    } //onCreate
+
+
 }
+
+/*
+Sources
+https://www.youtube.com/watch?v=RiHGwJ_u27k
+https://www.youtube.com/watch?v=mlH2ct-ZadU
+
+ */
