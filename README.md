@@ -6,3 +6,7 @@ The application will allow user to input or take a picture of the ingredients o
 Tools Used: Android Studio | Spoonacular Api | Firebase 
 
 
+
+
+https://user-images.githubusercontent.com/97133949/168167651-fdb1432d-d8ad-4e29-ba5a-808c1be84242.mp4
+
