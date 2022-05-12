@@ -1,9 +1,7 @@
-# CookingCoach
+This is an application created on Android Studio that assists and instructs people on what to do with the cooking ingredients they have at home or from a leftover meal.
 
-Repository Link: https://github.com/devnaganoolil/CookingCoach
+The application will allow user to input or take a picture of the ingredients or meals and show the list of recipes based on the input.
 
-To run this code, you can either ask one of the developers to add you as a collaborator to the github repo so that you can "git pull" the code to our android studio 
-or you can physically copy the code and paste it into android studio and run.
+Tools Used: Android Studio | Spoonacular Api | Firebase 
 
 
-After compiling it, you can register yourself a account and login and use the app normally.  
